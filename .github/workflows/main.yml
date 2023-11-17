@@ -18,10 +18,3 @@ jobs:
       run: |
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
         ls -la
-        cd app
-        echo Build TAG : 
-        echo $GITHUB_RUN_NUMBER
-        docker build -t hello1 .
-        docker tag hello1 rfdnet/hello1:$GITHUB_RUN_NUMBER
-        #docker tag hello1 rfdnet/hello1:latest
-        docker push rfdnet/hello1:$GITHUB_RUN_NUMBER
