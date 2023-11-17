@@ -1,4 +1,4 @@
-name: Docker Image CI for Minha App - devops prj1
+name: Docker Image CI for Minha App
 
 on:
   push:
@@ -16,8 +16,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image for Minha-app
       run: |
-        cd app
-        ls -la
-        docker build -t hello1 .
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        docker images
+        ls -la
+        cd app
+        echo Build TAG : 
+        echo $GITHUB_RUN_NUMBER
+        docker build -t hello1 .
+        docker tag hello1 rfdnet/hello1:$GITHUB_RUN_NUMBER
+        #docker tag hello1 rfdnet/hello1:latest
+        docker push rfdnet/hello1:$GITHUB_RUN_NUMBER
