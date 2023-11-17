@@ -1,10 +1,10 @@
-ame: Docker Image CI for Minha App
+name: Docker Image CI for Minha App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
 
@@ -15,13 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image for Minha-app
-      run: |
-        echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
-        ls -la
-        cd app
-        echo Build TAG : 
-        echo $GITHUB_RUN_NUMBER
-        docker build -t hello1 .
-        docker tag hello1 rfdnet/hello1:$GITHUB_RUN_NUMBER
-        #docker tag hello1 rfdnet/hello1:latest
-        docker push rfdnet/hello1:$GITHUB_RUN_NUMBER
+      run: "echo \"${{ secrets.DOCKER_HUB_TOKEN }}\" | docker login -u \"${{ secrets.DOCKER_HUB_USERNAME }}\" --password-stdin docker.io\nls -la\ncd app\necho Build TAG : \necho $GITHUB_RUN_NUMBER\ndocker build -t hello1 .\ndocker tag hello1 rfdnet/hello1:$GITHUB_RUN_NUMBER\n#docker tag hello1 rfdnet/hello1:latest\ndocker push rfdnet/hello1:$GITHUB_RUN_NUMBER\n"
