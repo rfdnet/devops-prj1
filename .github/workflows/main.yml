@@ -1,4 +1,4 @@
-name: Docker Image CI for Minha App
+name: Docker Image CI for Minha App - devops prj1
 
 on:
   push:
@@ -16,5 +16,4 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image for Minha-app
       run: |
-        echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
         ls -la
