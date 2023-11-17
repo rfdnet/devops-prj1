@@ -20,3 +20,4 @@ jobs:
         ls -la
         docker build -t hello1 .
         echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+        docker images
