@@ -58,3 +58,6 @@ terraform.rc
 
 #local locks file
 infra/.terraform.lock*
+
+#vscode
+.DS_Store
