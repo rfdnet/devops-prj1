@@ -1,9 +1,16 @@
 # devops-prj1
 
-This is a test / base project with APP + Infra 
+This is my test / base project with APP + Infra + Github Action (pipeline) 
 
 
+Part 1 - Terraform infra 
+All terraform scripts are saved with /infra. Also you need to deploy cluster-autoscaler.yml (see app/cluster-autoscaler)
 
+Part 2 - Application
+This is a hello world application using nginx image and a simple static content (see app/static-content)
+
+Part 3 - CI/CD with github actions
+GITHUB Actions solution to push latest changes on Kubernetes cluster.
 
 
 
