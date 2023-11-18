@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: minha-app
+  name: minha-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: minha-app
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.24.0 (4a2a0458)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: minha-app
+    spec:
+      containers:
+      - image: rfdnet/hello1:15
+        name: minha-app-hello1
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}
