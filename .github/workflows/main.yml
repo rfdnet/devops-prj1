@@ -1,4 +1,4 @@
-name: Docker Image CI for Minha App
+name: Docker Image build for Minha App
 
 on:
   push:
