@@ -1,19 +1,19 @@
 ### DEPENDENCIES BEFORE TERRAFORM ###
 # 
-# AWS_PROFILE=default aws ec2 create-key-pair --region=us-west-2 --key-name bastion-host --query 'KeyMaterial' --output text > bastion-host.pem
-# chmod 400 bastion-host.pem
+# AWS_PROFILE=default aws ec2 create-key-pair --region=us-west-2 --key-name bastion --query 'KeyMaterial' --output text > bastion.pem
+# chmod 400 bastion.pem
 #
 ### DEPENDENCIES AFTER TERRAFORM ###
-# ssh -i bastion-host.pem ec2-user@[private-ip]
+# ssh -i bastion.pem ec2-user@[private-ip]
 
 resource "aws_instance" "bastion" {
   ami                  = var.ami_type
   instance_type        = var.bastion_type
   subnet_id            = aws_subnet.public-us-west-2a.id
-  key_name             = "bastion-host"
+  key_name             = "bastion"
   iam_instance_profile = aws_iam_instance_profile.demo-profile.name
   tags = {
-    Name = "bastion-host"
+    Name = "bastion"
   }
 
   security_groups = ["${aws_security_group.sg-bastion-ingress.id}"]
