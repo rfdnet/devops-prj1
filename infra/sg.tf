@@ -1,3 +1,8 @@
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}
+
+
 resource "aws_security_group" "sg-bastion-ingress" {
 
   name        = "allow-bastion-ingress"
@@ -9,7 +14,8 @@ resource "aws_security_group" "sg-bastion-ingress" {
 
   ingress {
     description = "allow ssh - managed by Terraform"
-    cidr_blocks = ["179.98.136.91/32"] //needs to improve this!
+    //cidr_blocks = ["179.98.136.91/32"] //needs to improve this!
+    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -19,7 +25,8 @@ resource "aws_security_group" "sg-bastion-ingress" {
 
   ingress {
     description = "allow icmp - managed by Terraform "
-    cidr_blocks = ["0.0.0.0/0"] //need to improve this!
+    //cidr_blocks = ["179.98.136.91/32"] //needs to improve this!
+    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
