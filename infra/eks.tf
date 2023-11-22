@@ -1,3 +1,4 @@
+//AmazonEKSClusterPolicy
 resource "aws_iam_role" "demo" {
   name = "eks-cluster-demo"
 

@@ -58,6 +58,11 @@ terraform.rc
 
 #local locks file
 infra/.terraform.lock*
+terraform.tfstate
 
 #vscode
 .DS_Store
+
+#keypays
+*.pem
+bastion.pem
