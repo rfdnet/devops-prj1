@@ -1,5 +1,5 @@
 name: deploy to cluster Demo - manual trigger
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{ github.actor }} is running a deploy on cluster Demo
 on: 
   workflow_dispatch
 
@@ -11,14 +11,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
+    - name: 1 - Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
     
-    - name: deploy to cluster
+    - name: 2 - deploy to cluster
       uses: kodermax/kubectl-aws-eks@main
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
@@ -26,4 +26,5 @@ jobs:
         ECR_REPOSITORY: my-app
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: set image deployment/nginx nginx=rfdnet/hello1
+        ls -la
+        # args: set image deployment/nginx nginx=rfdnet/hello1
