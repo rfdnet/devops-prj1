@@ -18,6 +18,6 @@ jobs:
       - name: Run kubectl
         uses: nikosch86/github-action-eks-kubectl@main
         with:
-          command: "apply deployment.yaml"
+          command: "get svc"
         env:
           EKS_CLUSTER: demo
