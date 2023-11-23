@@ -19,7 +19,5 @@ jobs:
         uses: nikosch86/github-action-eks-kubectl@main
         with:
           command: "ls -la"
-          comamnd: "pwd"
-          command: "get svc"
         env:
           EKS_CLUSTER: demo
