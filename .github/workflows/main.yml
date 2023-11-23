@@ -22,6 +22,5 @@ jobs:
         echo Build TAG : 
         echo $GITHUB_RUN_NUMBER
         docker build -t hello1 .
-        docker tag hello1 rfdnet/hello1:$GITHUB_RUN_NUMBER
-        
-        docker push rfdnet/hello1:$GITHUB_RUN_NUMBER
+        docker tag hello1 rfdnet/hello1
+        docker push rfdnet/hello1
