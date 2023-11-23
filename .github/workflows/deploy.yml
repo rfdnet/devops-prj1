@@ -1,5 +1,5 @@
-on: push
-name: deploy
+on: workflow_dispatch
+name: deploy to cluster Demo - manual trigger
 jobs:
   deploy:
     name: deploy to cluster
