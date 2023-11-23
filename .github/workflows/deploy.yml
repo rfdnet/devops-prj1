@@ -1,0 +1,21 @@
+name: Ddeploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: aws-actions/configure-aws-credentials@v1
+    - name: Configure AWS Credentials
+      run: |
+        echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin docker.io
+        ls -la
+        aws eks --region us-west-2 update-kubeconfig --name demo
