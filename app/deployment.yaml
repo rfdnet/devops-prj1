@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rfdnet/hello1:26 # my docker hub image
+        image: rfdnet/hello1:latest
         ports:
         - name: web
           containerPort: 80
