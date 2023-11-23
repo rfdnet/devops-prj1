@@ -18,6 +18,7 @@ jobs:
       - name: Run kubectl
         uses: nikosch86/github-action-eks-kubectl@main
         with:
+          command: "aws eks --region us-west-2 update-kubeconfig --name demo"
           command: "get svc"
         env:
           EKS_CLUSTER: demo
