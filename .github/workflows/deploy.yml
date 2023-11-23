@@ -26,5 +26,5 @@ jobs:
         ECR_REPOSITORY: my-app
         IMAGE_TAG: ${{ github.sha }}
       with:
-        ls -la
+        args: ls -la
         # args: set image deployment/nginx nginx=rfdnet/hello1
