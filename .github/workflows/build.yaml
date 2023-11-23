@@ -24,3 +24,5 @@ jobs:
         docker build -t hello1 .
         docker tag hello1 rfdnet/hello1
         docker push rfdnet/hello1
+
+        
