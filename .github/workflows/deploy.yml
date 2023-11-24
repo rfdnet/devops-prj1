@@ -19,7 +19,7 @@ jobs:
 
     - name: 2 - Install and configure kubectl
       run: |
-        ls -la
+        aws eks --region us-west-2 update-kubeconfig --name demo
 
     
     # - name: 2 -deploy to cluster
