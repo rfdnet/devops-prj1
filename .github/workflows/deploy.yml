@@ -22,7 +22,7 @@ jobs:
         aws eks --region us-west-2 update-kubeconfig --name demo
         echo "Running kubectl now..."
         echo $GITHUB_RUN_NUMBER
-        #kubectl set image deployment/nginx nginx=rfdnet/hello1:$GITHUB_RUN_NUMBER
+        kubectl set image deployment/nginx nginx=rfdnet/hello1
         
     - name: 3 - show new pod(s)
       run: |
