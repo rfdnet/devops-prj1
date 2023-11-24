@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:mainline-alpine3.18-slim
 #RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 # minha-app
