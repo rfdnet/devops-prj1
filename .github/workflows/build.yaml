@@ -20,11 +20,9 @@ jobs:
         ls -la
         cd app
         echo Build TAG : 
-        echo $GITHUB_RUN_NUMBER
-        docker build -t hello1 .
-        docker tag hello1 rfdnet/hello1 
-        docker push rfdnet/hello1
-        docker images
-        echo "test with var $github_sha....."
         echo $GITHUB_SHA
+        docker build -t hello1 .
+        docker tag hello1 rfdnet/hello1:$GITHUB_SHA 
+        docker push rfdnet/hello1:$GITHUB_SHA
+        docker images
         echo "Done"
