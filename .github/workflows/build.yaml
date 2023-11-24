@@ -25,3 +25,6 @@ jobs:
         docker tag hello1 rfdnet/hello1 
         docker push rfdnet/hello1
         docker images
+        echo "test with var $github_sha....."
+        echo $GITHUB_SHA
+        echo "Done"
