@@ -21,12 +21,19 @@ jobs:
         cd app
         
         docker build -t hello1 .
-        docker tag hello1 rfdnet/hello1:$GITHUB_SHA 
+
+        echo "change TAG from $GITHUB_SHA and push"
+        docker tag hello1 rfdnet/hello1:$GITHUB_SHA
         docker push rfdnet/hello1:$GITHUB_SHA
-        docker images
+
+        echo "change TAG from $GITHUB_SHA to latest and push"
+        docker tag rfdnet/hello1:$GITHUB_SHA rfdnet/hello1:latest
+        docker push rfdnet/hello1:latest
+        
+        
         echo "Done"
 
     - name: 2 - docker image scan
       uses: anchore/scan-action@v3
       with:
-        image: "rfdnet/hello1:$GITHUB_SHA
+        image: "rfdnet/hello1:latest"
