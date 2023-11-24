@@ -18,7 +18,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
     
-    - name: 2 - deploy to cluster
+    - name: 2 -deploy to cluster
+      run: ls -la
       uses: kodermax/kubectl-aws-eks@main
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
@@ -26,5 +27,4 @@ jobs:
         ECR_REPOSITORY: my-app
         IMAGE_TAG: ${{ github.sha }}
       with:
-        args: ls -la
-        # args: set image deployment/nginx nginx=rfdnet/hello1
+        args: set image deployment/nginx nginx=rfdnet/hello1
