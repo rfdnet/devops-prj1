@@ -20,8 +20,8 @@ jobs:
     - name: 2 - Deploy latest image
       run: |
         aws eks --region us-west-2 update-kubeconfig --name demo
-        echo "Running kubectl now..."
-        kubectl set image deployment/nginx nginx=rfdnet/hello1
+        echo "Running kubectl"
+        kubectl set image deployment/nginx nginx=rfdnet/hello1:latest
         
     - name: 3 - show new pod(s)
       run: |
