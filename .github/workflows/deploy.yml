@@ -17,7 +17,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-      run: ls -la
+    - name: 2 - eks deploy
+      run: |
+      ls -la
+      pwd
+      
     
     # - name: 2 -deploy to cluster
     #   uses: kodermax/kubectl-aws-eks@main
