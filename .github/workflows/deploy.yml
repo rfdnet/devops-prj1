@@ -20,5 +20,5 @@ jobs:
     - name: 2 - Install and configure kubectl
       run: |
         aws eks --region us-west-2 update-kubeconfig --name demo
-        kubectl get svc
+        echo "Running kubectl now..."
         kubectl set image deployment/nginx nginx=rfdnet/hello1:latest
