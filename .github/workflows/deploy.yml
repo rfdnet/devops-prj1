@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
   
+
     - name: 1 - Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -16,10 +17,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    
-    - name: 2 - New pod(s)
+
+    - name: 2 - Deploy latest image
       run: |
-        kubectl get po
-        echo "listing LB"
-        echo "Done"
-        kubectl get svc
+        aws eks --region us-west-2 update-kubeconfig --name demo
+        echo "Running kubectl"
+        kubectl set image deployment/nginx nginx=rfdnet/hello1:$GITHUB_SHA
+        
