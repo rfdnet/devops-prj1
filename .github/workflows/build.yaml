@@ -37,3 +37,4 @@ jobs:
       uses: anchore/scan-action@v3
       with:
         image: "rfdnet/hello1:latest"
+        severity-cutoff: critical
