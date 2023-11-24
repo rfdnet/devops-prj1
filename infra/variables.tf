@@ -16,7 +16,7 @@ variable "instance_type" {
 variable "bastion_type" {
   description = "Bastion host ec2 instance type"
   type        = string
-  default     = "t2.micro" //default = "t3.small"
+  default     = "t2.small" 
 }
 
 variable "ami_type" {

@@ -42,7 +42,7 @@ resource "aws_eks_node_group" "private-nodes" {
     aws_subnet.private-us-west-2b.id
   ]
 
-  capacity_type = "ON_DEMAND" //on_DEMAND or SPORT Instances
+  capacity_type = "SPOT" //on_DEMAND or SPOT Instances
 
   instance_types = var.instance_type //instance type e.g : t3.small
 

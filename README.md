@@ -18,3 +18,6 @@ This is a hello world application using nginx image and a simple static content 
 
 Part 3 - CI/CD with github actions
 GITHUB Actions solution to push latest changes on Kubernetes cluster.
+
+Part4 - Grafana and Prometheus
+In this part you will check where grafana is running, then access the monitoring url
