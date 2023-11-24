@@ -26,3 +26,8 @@ jobs:
         docker push rfdnet/hello1:$GITHUB_SHA
         docker images
         echo "Done"
+
+    - name: 2 - docker image scan
+      uses: anchore/scan-action@v3
+      with:
+        image: "rfdnet/hello1:$GITHUB_SHA"
