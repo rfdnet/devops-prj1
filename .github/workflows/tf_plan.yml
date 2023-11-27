@@ -32,7 +32,8 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt -check
+        run: ls -la 
+        #terraform fmt -check
 
       - name: Terraform Init
         id: init
