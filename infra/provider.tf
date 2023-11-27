@@ -1,27 +1,63 @@
 provider "aws" {
-  region = "us-west-2" //I choose Oregon for cust proposes!! 
-
-  default_tags {
-   tags = {
-     proj = "Demo"
-     manageBy = "beatiful terraform :-)"
-     Owner = "eu mesmo"
-   }
-   
-  }
-
+  region = "us-west-2"
 }
 
+# //Local Backend
+# terraform {
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "~> 3.0"
+#     }
+#   }
+# }
 
+//Remote Backend
 terraform {
+  backend "s3" {
+
+
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.0"
     }
   }
+}
 
-  backend "s3" {
 
+// s3 bucket for tf remote state
+resource "aws_s3_bucket" "terraform_state" {
+  bucket        = "my-devops-project-01-tf-state-2023"
+  force_destroy = true
+  tags = {
+    Name        = "TF state bucket"
+    Environment = "dev"
   }
+
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+
+      }
+    }
+  }
+
+}
+//DynameDB table for terraform state
+resource "aws_dynamodb_table" "terraform_locks" {
+  name         = "terraform-state-locking"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
 }

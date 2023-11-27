@@ -1,4 +1,4 @@
-bucket         = "tfstate-9683395007"
-key            = "terraform-gha/dev/terraform.tfstate"
+bucket         = "my-devops-project-01-tf-state-2023"
+key            = "tf-infra/project1/dev/terraform.tfstate"
 region         = "us-west-2"
-dynamodb_table = "tflock-tfstate-9683395007"
+encrypt        = true
