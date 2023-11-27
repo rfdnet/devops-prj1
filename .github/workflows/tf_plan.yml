@@ -74,7 +74,7 @@ jobs:
     name: 'terraform plan prod'
     runs-on: ubuntu-latest
     env:
-      TF_WORKING_DIR: '0003-terraform-gha'
+      TF_WORKING_DIR: 'infra'
 
     defaults:
       run:
