@@ -3,6 +3,6 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name = "main"
-    Env = "my demo project"
+    Env  = "my demo project"
   }
 }

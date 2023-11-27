@@ -10,7 +10,7 @@ resource "aws_instance" "bastion" {
   ami                  = var.ami_type
   instance_type        = var.bastion_type
   subnet_id            = aws_subnet.public-us-west-2a.id
-  key_name             = "bastion"
+  key_name             = "bastion" //check dependencies!!!
   iam_instance_profile = aws_iam_instance_profile.demo-profile.name
   tags = {
     Name = "bastion"
