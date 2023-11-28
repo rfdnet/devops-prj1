@@ -23,27 +23,27 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
 
     steps:
-      - name: Checkout
+      - name: 1 - Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
+      - name: 2 - Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.15.5
 
-      - name: Terraform fmt
+      - name: 3 -Terraform fmt
         id: fmt
         run: terraform fmt
              
-      - name: Terraform init
+      - name: 4 - Terraform init
         id: init
         run: terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
 
-      - name: Terraform validate
+      - name: 5 - Terraform validate
         id: validate
         run: terraform validate -no-color
 
-      - name: Terraform Plan
+      - name: 6 - Terraform Plan
         id: planprod
-        run: ls -la 
+        run: pwd ; ls -la 
         #terraform plan -var-file="config/prod/terraform.tfvars"
