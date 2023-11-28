@@ -48,6 +48,6 @@ jobs:
         id: planprod
         run: 
           #terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
-          pwd ; ls
+          ls
           echo "NOW RUNNING TF PLAN:"
           terraform plan
