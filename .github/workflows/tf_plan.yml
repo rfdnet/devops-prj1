@@ -57,5 +57,6 @@ jobs:
         id: plan-run
         with:
           #workspace: ${{ env.TF_WORKSPACE }}
+          backend_config_file: config/prod/terraform.tfvars
           configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
