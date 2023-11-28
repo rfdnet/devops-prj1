@@ -33,7 +33,7 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: pwd ; ls 
+        run: terraform fmt
              
 
       - name: Terraform init
