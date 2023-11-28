@@ -45,4 +45,5 @@ jobs:
 
       - name: Terraform Plan
         id: planprod
-        run: terraform plan -var-file="config/prod/terraform.tfvars"
+        run: ls -la 
+        #terraform plan -var-file="config/prod/terraform.tfvars"
