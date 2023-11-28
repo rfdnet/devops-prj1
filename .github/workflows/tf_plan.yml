@@ -1,4 +1,4 @@
-name: Create terraform plan on folder infra
+name: Terraform PLAN
 run-name: ${{ github.actor }} is running a TF plan
 
 on:
@@ -44,7 +44,7 @@ jobs:
         id: validate
         run: terraform validate -no-color
       
-      - name: Terraform Plan
+      - name: 6 - Terraform Plan
         id: plan
         run: |
           terraform plan -input=false -no-color -var-file="config/prod/terraform.tfvars"

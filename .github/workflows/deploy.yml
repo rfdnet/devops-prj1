@@ -1,4 +1,4 @@
-name: deploy to cluster Demo - manual trigger
+name: deploy docker image to k8s cluster DEMO
 run-name: ${{ github.actor }} is running a deploy on cluster Demo
 on: 
   workflow_dispatch

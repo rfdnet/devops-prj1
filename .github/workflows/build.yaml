@@ -1,7 +1,9 @@
-name: build
+name: build docker image
 
 on:
   workflow_dispatch:
+    paths:
+      - 'app/**'
     
 
 jobs:
