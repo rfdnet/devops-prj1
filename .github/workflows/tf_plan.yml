@@ -1,5 +1,5 @@
 name: Terraform PLAN
-run-name: ${{ github.actor }} is running a TF plan
+#run-name: ${{ github.actor }} is running a TF plan
 
 on:
   workflow_dispatch:
