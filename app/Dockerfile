@@ -6,5 +6,6 @@ FROM nginx:mainline-alpine3.18-slim
 # copy local static dir files to nginx container
 # app name : minha-app
 #
+#
 #RUN apt-get update -y
 COPY static-content /usr/share/nginx/html
