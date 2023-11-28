@@ -43,9 +43,7 @@ jobs:
       - name: 5 - Terraform validate
         id: validate
         run: terraform validate -no-color
-
-      - name: 6 - Terraform Plan
+      
+      - name: Terraform Plan
         id: plan
-        run: 
-          #terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
-          terraform plan -no-color
+        run: terraform plan -input=false -no-color -var-file="config/prod/terraform.tfvars"
