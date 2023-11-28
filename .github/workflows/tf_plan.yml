@@ -1,4 +1,5 @@
 name: Create terraform plan on folder infra
+run-name: ${{ github.actor }} is running a TF plan
 
 on:
   workflow_dispatch:
@@ -47,4 +48,6 @@ jobs:
         id: planprod
         run: 
           terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
-          terraform plan -var-file="config/prod/terraform.tfvars"
+          pwd ; ls
+          echo "NOW RUNNING TF PLAN:"
+          terraform plan -no-color -var-file="config/prod/terraform.tfvars"
