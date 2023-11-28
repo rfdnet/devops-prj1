@@ -14,7 +14,7 @@ resource "aws_instance" "bastion" {
   iam_instance_profile = aws_iam_instance_profile.demo-profile.name
   tags = {
     //Name = "bastion"
-    
+
   }
 
   security_groups = ["${aws_security_group.sg-bastion-ingress.id}"]

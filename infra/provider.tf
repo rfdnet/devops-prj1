@@ -3,10 +3,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project = "demo"
+      Project   = "demo"
       ManagedBy = "terraform"
-      Owner = "Reinaldo Dias"
-
+      Owner     = "Reinaldo Dias"
     }
   }
 }
