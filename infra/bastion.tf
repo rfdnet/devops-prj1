@@ -5,6 +5,7 @@
 #
 ### DEPENDENCIES AFTER TERRAFORM ###
 # ssh -i bastion.pem ec2-user@[private-ip]
+#
 
 resource "aws_instance" "bastion" {
   ami                  = var.ami_type
