@@ -13,7 +13,7 @@ env:
 jobs:
 
   plan-prod:
-    name: 'terraform plan prod'
+    name: 'terraform plan PROD'
     runs-on: ubuntu-latest
     env:
       TF_WORKING_DIR: 'infra'
@@ -48,6 +48,69 @@ jobs:
         id: plan
         run: |
           terraform plan -input=false -no-color -var-file="config/prod/terraform.tfvars"
+
+
+      # github integration with PR
+      - uses: actions/github-script@0.9.0
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
+        with:
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            <details><summary>Show Plan</summary>
+            \`\`\`${process.env.PLAN}\`\`\`
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.TF_WORKING_DIR }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+            })
+
+  plan-dev:
+    name: 'terraform plan DEV'
+    runs-on: ubuntu-latest
+    env:
+      TF_WORKING_DIR: 'infra'
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+      - name: 1 - Checkout
+        uses: actions/checkout@v2
+
+      - name: 2 - Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 0.15.5
+
+      - name: 3 -Terraform fmt
+        id: fmt
+        run: terraform fmt
+             
+      - name: 4 - Terraform init
+        id: init
+        run: terraform init -reconfigure -backend=true -backend-config="config/dev/backend.hcl"
+
+      - name: 5 - Terraform validate
+        id: validate
+        run: terraform validate -no-color
+      
+      - name: 6 - Terraform Plan
+        id: plan
+        run: |
+          terraform plan -input=false -no-color -var-file="config/dev/terraform.tfvars"
 
 
       # github integration with PR
