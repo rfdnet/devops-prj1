@@ -1,4 +1,4 @@
-name: Create terraform plan on folder 0003-terraform-gha
+name: Create terraform plan on folder infra
 
 on:
   workflow_dispatch:
@@ -40,10 +40,10 @@ jobs:
         id: init
         run: terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
 
-      - name: Terraform Validate
+      - name: Terraform validate
         id: validate
         run: terraform validate -no-color
 
       - name: Terraform Plan
         id: planprod
-        run: terraform plan -var-file="config/prod/terraform.tfvars"
+        run: pwd ; ls -l
