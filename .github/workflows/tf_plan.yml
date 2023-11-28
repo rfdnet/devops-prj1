@@ -1,4 +1,4 @@
-name: terraform plan
+name: Create terraform plan on folder 0003-terraform-gha
 
 on:
   pull_request:
@@ -14,7 +14,7 @@ jobs:
     name: 'terraform plan dev'
     runs-on: ubuntu-latest
     env:
-      TF_WORKING_DIR: 'infra/'
+      TF_WORKING_DIR: 'infra'
 
     defaults:
       run:
@@ -32,13 +32,11 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: ls -la 
-        #terraform fmt -check
+        run: terraform fmt -check
 
       - name: Terraform Init
         id: init
-        #run: terraform init -backend=true -backend-config="config/dev/backend.hcl"
-        run: terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
+        run: terraform init -backend=true -backend-config="config/dev/backend.hcl"
 
       - name: Terraform Validate
         id: validate
@@ -46,7 +44,7 @@ jobs:
 
       - name: Terraform Plan
         id: plandev
-        run: terraform plan -no-color -var-file="config/prod/terraform.tfvars"
+        run: terraform plan -var-file="config/prod/terraform.tfvars"
 
       - uses: actions/github-script@0.9.0
         if: github.event_name == 'pull_request'
@@ -71,7 +69,6 @@ jobs:
             })
 
 
-            
   plan-prod:
     name: 'terraform plan prod'
     runs-on: ubuntu-latest
@@ -98,7 +95,6 @@ jobs:
 
       - name: Terraform Init
         id: init
-        #run: terraform init -backend=true -backend-config="config/dev/backend.hcl"
         run: terraform init -reconfigure -backend=true -backend-config="config/prod/backend.hcl"
 
       - name: Terraform Validate
