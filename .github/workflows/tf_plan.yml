@@ -49,5 +49,5 @@ jobs:
         run: |
           pwd ; ls -la 
           echo "dir config"
-          ls -la config/
+          ls -la config/prod
           #terraform plan -input=false -no-color -var-file="config/prod/terraform.tfvars"
