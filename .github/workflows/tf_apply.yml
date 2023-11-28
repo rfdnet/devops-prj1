@@ -28,22 +28,22 @@ jobs:
       - name: 1 - Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
+      - name: 2 - Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.15.5
 
-      - name: 2 - Terraform fmt
+      - name: 3 - Terraform fmt
         id: fmt
         run: terraform fmt -check
 
-      - name: 3 - Terraform Init
+      - name: 4 - Terraform Init
         id: init
         run: terraform init -reconfigure -backend=true -backend-config="config/dev/backend.hcl"
 
-      - name: 4 - Terraform Validate
+      - name: 5 - Terraform Validate
         id: validate
         run: terraform validate -no-color
 
-      - name: 5 - Terraform Apply
+      - name: 6 - Terraform Apply
         run: terraform apply -auto-approve -var-file="config/dev/backend.hcl"
