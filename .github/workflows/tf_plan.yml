@@ -46,4 +46,4 @@ jobs:
 
       - name: Terraform Plan
         id: planprod
-        run: pwd ; ls -l
+        run: terraform plan -var-file="config/prod/terraform.tfvars"
