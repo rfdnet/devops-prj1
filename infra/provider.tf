@@ -5,6 +5,7 @@ provider "aws" {
     tags = {
       Project = "demo"
       ManagedBy = "terraform"
+      Owner = "Reinaldo Dias"
 
     }
   }
