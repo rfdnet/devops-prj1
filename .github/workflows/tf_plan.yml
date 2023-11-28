@@ -53,7 +53,7 @@ jobs:
       #     terraform plan -no-color -var-file="config/prod/terraform.tfvars"
 
       - name: 6 - Terraform Plan
-        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        uses: dflook/terraform-plan@v1
         id: plan-run
         with:
           #workspace: ${{ env.TF_WORKSPACE }}
