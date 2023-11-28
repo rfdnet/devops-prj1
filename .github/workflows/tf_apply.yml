@@ -1,0 +1,49 @@
+name: Apply terraform resources on folder infra/ with DEV config
+
+on:
+  push:
+    branches:
+      - main
+
+    paths:
+      - 'infra/**'
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  apply-dev:
+    name: 'terraform apply dev'
+    runs-on: ubuntu-latest
+    env:
+      TF_WORKING_DIR: 'infra'
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+      - name: 1 - Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.15.5
+
+      - name: 2 - Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+
+      - name: 3 - Terraform Init
+        id: init
+        run: terraform init -reconfigure -backend=true -backend-config="config/dev/backend.hcl"
+
+      - name: 4 - Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: 5 - Terraform Apply
+        run: terraform apply -auto-approve -var-file="config/dev/backend.hcl"
