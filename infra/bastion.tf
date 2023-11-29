@@ -16,7 +16,7 @@ resource "aws_instance" "bastion" {
     Name = "bastion-${var.environment}"
     Depto = "Infra"
     contact = "rfdnet@gmail.com"
-    test2 = "teste2"
+    test3 = "teste3"
 
   }
 
