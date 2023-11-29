@@ -1,5 +1,6 @@
-name: deploy docker image to k8s cluster DEMO
-run-name: ${{ github.actor }} is running a deploy on cluster Demo
+name: Deploy to k8s cluster DEMO
+
+
 on: 
   workflow_dispatch:
     paths:
@@ -7,13 +8,15 @@ on:
 
 
 
+
+
 jobs:
+
   deploy:
-    name: deploy to cluster Demo - manual trigger
+    name: Deploy to cluster Demo - manual trigger
     runs-on: ubuntu-latest
     steps:
   
-
     - name: 1 - Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -21,10 +24,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-
     - name: 2 - Deploy latest image
       run: |
         aws eks --region us-west-2 update-kubeconfig --name demo
         echo "Running kubectl"
         kubectl set image deployment/nginx nginx=rfdnet/hello1:$GITHUB_SHA
-        
