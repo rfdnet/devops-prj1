@@ -43,6 +43,4 @@ jobs:
         run: terraform validate -no-color
 
       - name: 6 - Terraform Apply
-        run: |
-           ls -l config/prod/ ; pwd
-           terraform apply -auto-approve -var-file="config/prod/terraform.tfvars"
+        run: terraform apply -auto-approve -var-file="config/prod/terraform.tfvars"
