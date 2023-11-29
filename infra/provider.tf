@@ -3,7 +3,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project   = "POC"
+      Project   = "Demo"
       ManagedBy = "terraform"
       Owner     = "Reinaldo Dias"
     }
