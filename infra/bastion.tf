@@ -14,7 +14,7 @@ resource "aws_instance" "bastion" {
   key_name             = "bastion" //check dependencies!!!
   iam_instance_profile = aws_iam_instance_profile.demo-profile.name
   tags = {
-    //Name = "bastion"
+    Name = "bastion-${var.environment}"
 
   }
 
