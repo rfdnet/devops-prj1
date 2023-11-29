@@ -51,7 +51,7 @@ jobs:
 
 
       # github integration with PR
-      - uses: actions/github-script@0.9.0
+      - uses: actions/github-script@v7.0.1
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
@@ -113,7 +113,7 @@ jobs:
 
 
       # github integration with PR
-      - uses: actions/github-script@0.9.0
+      - uses: actions/github-script@v7.0.1
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
