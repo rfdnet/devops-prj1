@@ -44,5 +44,5 @@ jobs:
 
       - name: 6 - Terraform Apply
         run: |
-           ls -l ; pwd
+           ls -l config/prod/ ; pwd
            #terraform apply -auto-approve -var-file="config/prod/backend.hcl"
