@@ -2,7 +2,7 @@ name: TF PLAN
 #run-name: ${{ github.actor }} is running a TF plan
 
 on:
-  push:
+  pull-request:
     branches:
        - main
       
