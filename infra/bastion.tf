@@ -15,6 +15,7 @@ resource "aws_instance" "bastion" {
   tags = {
     Name = "bastion-${var.environment}"
     Depto = "Infra"
+    contact = "rfdnet@gmail.com"
 
   }
 
