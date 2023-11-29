@@ -51,27 +51,36 @@ jobs:
 
 
       # github integration with PR
-      - uses: actions/github-script@v7.0.1
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
+      - uses: actions/github-script@v7
         with:
-
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            <details><summary>Show Plan</summary>
-            \`\`\`${process.env.PLAN}\`\`\`
-            </details>
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.TF_WORKING_DIR }}\`, Workflow: \`${{ github.workflow }}\`*`;
-            github.issues.createComment({
-             issue_number: context.issue.number,
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             body: output
+            // Get a list of all issues created by the PR opener
+            // See: https://octokit.github.io/rest.js/#pagination
+            const creator = context.payload.sender.login
+            const opts = github.rest.issues.listForRepo.endpoint.merge({
+              ...context.issue,
+              creator,
+              state: 'all'
+            })
+            const issues = await github.paginate(opts)
+
+            for (const issue of issues) {
+              if (issue.number === context.issue.number) {
+                continue
+              }
+
+              if (issue.pull_request) {
+                return // Creator is already a contributor.
+              }
+            }
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `**Welcome**, new contributor!
+
+                Please make sure you've read our [contributing guide](CONTRIBUTING.md) and we look forward to reviewing your Pull request shortly ✨`
             })
 
   plan-dev:
@@ -110,27 +119,3 @@ jobs:
         id: plan
         run: |
           terraform plan -input=false -no-color -var-file="config/dev/terraform.tfvars"
-
-
-      # github integration with PR
-      - uses: actions/github-script@v7.0.1
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plandev.outputs.stdout }}"
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            <details><summary>Show Plan</summary>
-            \`\`\`${process.env.PLAN}\`\`\`
-            </details>
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.TF_WORKING_DIR }}\`, Workflow: \`${{ github.workflow }}\`*`;
-            github.issues.createComment({
-             issue_number: context.issue.number,
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             body: output
-            })
