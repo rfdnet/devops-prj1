@@ -12,13 +12,12 @@ All terraform scripts are saved with /infra. Also you need to deploy cluster-aut
 Eg : aws eks --region us-west-2 update-kubeconfig --name demo
 
 
-
 Part 2 - Application
 This is a hello world application using nginx image and a simple static content (see app/static-content)
 
 Part 3 - CI/CD with github actions
-GITHUB Actions solution to push latest changes on Kubernetes cluster.
-GITHUB Actions for IAC
+GITHUB Actions solution to push latest docker image on Kubernetes cluster.
+GITHUB Actions for IAC/Terraform (See TF Plan & TF Apply scripts on .github/workflow)
 
 Part4 - Grafana and Prometheus
-In this part you will check where grafana is running, then access the monitoring url
+In monit folder there is install scripts via terraform with helm in order to install and configure on the cluster EKS.
