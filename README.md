@@ -22,4 +22,4 @@ GITHUB Actions for IAC/Terraform (See TF Plan & TF Apply scripts on .github/work
 Part4 - Grafana and Prometheus
 In monit folder there is install scripts via terraform with helm in order to install and configure on the cluster EKS.
 
-![arq](https://github.com/rfdnet/devops-prj1/blob/main/arq.drawio)
+![arq](https://github.com/rfdnet/devops-prj1/main/arq.drawio)
