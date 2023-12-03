@@ -1,9 +1,13 @@
 name: TF APPLY - Apply terraform resources on folder infra/ with DEV config
 
+
 on:
   workflow_dispatch:
     paths:
     - 'infra/**'
+
+
+
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
