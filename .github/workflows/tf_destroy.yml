@@ -1,4 +1,4 @@
-name: Destroy terraform resources on the folder infra
+name: TF DESTROY resources on the folder infra
 
 
 on:
