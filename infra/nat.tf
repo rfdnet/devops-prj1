@@ -2,7 +2,7 @@ resource "aws_eip" "nat" {
   vpc = true
 
   tags = {
-    Name = "nat"
+    Name    = "nat"
     project = "demo"
 
   }
@@ -13,7 +13,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public-us-west-2a.id //nat goes here on public subnet !!!
 
   tags = {
-    Name = "nat"
+    Name    = "nat"
     project = "demo"
   }
 

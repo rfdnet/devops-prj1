@@ -40,13 +40,12 @@ resource "aws_s3_bucket" "terraform_state" {
   bucket        = "my-devops-project-01-tf-state-2024"
   force_destroy = true
   tags = {
-    Name        = "TF state bucket"
-    Environment = "dev"
+    Name = "TF state bucket"
   }
 
-   lifecycle {
-     prevent_destroy = true
-   }
+  lifecycle {
+    prevent_destroy = true
+  }
 
   server_side_encryption_configuration {
     rule {
