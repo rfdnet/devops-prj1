@@ -74,10 +74,10 @@ jobs:
 
       - name: 4 - Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: |
+         terraform validate -no-color
+         echo "terraform state rm aws_dynamodb_table.terraform_locks"
+         echo "terraform state rm aws_s3_bucket.terraform_state"
       
       - name: 5 - Terraform Destroy
-        run: | 
-         terraform state rm aws_dynamodb_table.terraform_locks
-         terraform state rm aws_s3_bucket.terraform_state
-         terraform destroy -auto-approve -var-file="config/prod/terraform.tfvars"
+        run: terraform destroy -auto-approve -var-file="config/prod/terraform.tfvars"
