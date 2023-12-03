@@ -25,5 +25,6 @@ resource "null_resource" "monit" {
       kubectl top pod --namespace monit 
       kubectl get secret --namespace monit monit-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
     EOT
+    
   }
 }
