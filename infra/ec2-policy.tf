@@ -1,7 +1,7 @@
 #Create an IAM Policy
 resource "aws_iam_policy" "demo-s3-policy" {
   name        = "S3-Bucket-Access-Policy"
-  description = "Provides permission to access S3"
+  description = "created by terraform - Provides permission to access S3"
 
   policy = jsonencode({
     Version = "2012-10-17"

@@ -3,6 +3,8 @@ resource "aws_eip" "nat" {
 
   tags = {
     Name = "nat"
+    project = "demo"
+
   }
 }
 
@@ -12,6 +14,7 @@ resource "aws_nat_gateway" "nat" {
 
   tags = {
     Name = "nat"
+    project = "demo"
   }
 
   depends_on = [aws_internet_gateway.igw]
