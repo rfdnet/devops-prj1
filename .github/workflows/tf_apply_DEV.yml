@@ -1,4 +1,4 @@
-name: TF APPLY - Apply terraform resources on folder infra/ with DEV config
+name: TF APPLY Apply terraform resources on folder infra/ with DEV config
 
 
 on:
