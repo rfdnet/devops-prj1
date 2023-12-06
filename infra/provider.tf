@@ -57,6 +57,7 @@ terraform {
 #   }
 
 # }
+
 //DynameDB table for terraform state
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = "terraform-state-locking"
