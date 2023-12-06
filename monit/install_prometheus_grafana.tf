@@ -16,14 +16,19 @@ resource "null_resource" "monit" {
 
   provisioner "local-exec" {
     command = <<EOT
+      echo "1 - helm installation"
       kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
       helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
       helm repo update
-      helm install monit prometheus-community/kube-prometheus-stack
       kubectl create ns monit
-      cd ../monit   ; helm upgrade --install monit prometheus-community/kube-prometheus-stack --namespace monit -f values.yaml
-      kubectl top pod --namespace monit 
+      echo "2 - helm chart install"
+      helm install monit prometheus-community/kube-prometheus-stack -n monit
+      echo "3 - now running upgrade"
+      helm upgrade --install monit prometheus-community/kube-prometheus-stack --namespace monit -f values.yaml
+      kubectl --namespace monit get pods -l "release=monit"
       kubectl get secret --namespace monit monit-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+      echo "4 - listing svc"
+      kubectl get svc -n monit
     EOT
 
   }
