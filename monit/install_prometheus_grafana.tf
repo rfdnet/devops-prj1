@@ -29,6 +29,9 @@ resource "null_resource" "monit" {
       kubectl get secret --namespace monit monit-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
       echo "4 - listing svc"
       kubectl get svc -n monit
+      echo "5 - Admin password :"
+      kubectl get secret --namespace monit monit-grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+      echo "6 - grafana access : User port-forward on local  OR create a ELB, eg: kubectl port-forward svc/monit-grafana 8080:80 -n monit"
     EOT
 
   }
